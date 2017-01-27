@@ -1,0 +1,5 @@
+[user]
+  name = Thierry Michel
+  email = thmichel@gmail.com
+[credential]
+  helper = osxkeychain

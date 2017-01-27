@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# bootstrap installs things.
+
+export ZSH=$HOME/.dotfiles
+
+source scripts/dotfiles
+source scripts/install
+
+echo ''
+echo '  Ze end!'

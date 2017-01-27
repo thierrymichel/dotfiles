@@ -1,0 +1,23 @@
+[storage]
+engine = file_system
+path = /Volumes/Data/Dropbox (Personnelle)
+directory = Mackup
+
+[applications_to_sync]
+amphetamine
+dash
+editorconfig
+fontexplorer-x
+git
+launchbar
+sizeup
+sketch
+ssh
+sublime-text-3
+transmit
+wakatime
+xtrafinder
+
+[configuration_files]
+.config/micro/settings.json
+.config/robomongo/robomongo.json

@@ -1,7 +1,3 @@
-# tm's dotfiles
+# tm's dotfiles (new version from scratch*)
 
-.files including .osx (Mac OS X fine tuning...)
-
-## Thanks to…
-
-- [Mathias Bynens](http://mathiasbynens.be/) and his [dotfiles repository](https://github.com/mathiasbynens/dotfiles)
+to do (after testing)
