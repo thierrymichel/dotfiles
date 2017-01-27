@@ -274,6 +274,8 @@ defaults write com.apple.dock no-bouncing -bool true
 # Display only open/active applications
 defaults write com.apple.dock static-only -bool true
 
+# Remove everything
+dockutil --no-restart --remove all
 
 
 ###############################################################################
