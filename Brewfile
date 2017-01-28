@@ -31,7 +31,6 @@ brew 'zsh-completions'
 brew 'avr-libc'
 brew 'jlhonora/lsusb/lsusb'
 
-cask '1password'
 cask 'a-better-finder-attributes'
 cask 'a-better-finder-rename'
 cask 'arduino'
