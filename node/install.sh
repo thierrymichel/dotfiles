@@ -1,14 +1,20 @@
+#!/bin/sh
+#
+# node/nvm installations
+
 echo "› installers:node"
 
-. ~/.zshrc
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+# . ~/.zshrc
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 nvm install --lts
 nvm use --lts
 
 NODE_VERSION=$(node -v)
 nvm alias default $NODE_VERSION
+
+npm update npm -g
 
 packages=(
   david
