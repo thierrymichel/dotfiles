@@ -13,10 +13,6 @@
     - `.zshrc`
 
 
-## MacOS defauls
-
-`dockutil` not found
-
 ## nvm
 
 v0.33.0
@@ -25,7 +21,21 @@ v0.33.0
 
 See [Brewfile](Brewfile)
 
-osx-cross/avr/avr-binutils (takes soooo long time!)
+* brew ✅
+* cask
+    - osx-cross/avr/avr-binutils (takes soooo long time!) -> try with changes (5694965)
+* mas
+    - Osfoora failed -> removed
+    - Already using Pages (not a problem)
+    - Already using Keynote (not a problem)
+
+> Homebrew Bundle failed! 1 Brewfile dependencies failed to install
+
+Password before 'casking'… -> bootstrap relaunched :/
+
+## MacOS defauls
+
+`dockutil` not found
 
 ## Installers
 

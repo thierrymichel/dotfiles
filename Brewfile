@@ -79,30 +79,29 @@ cask 'utorrent'
 cask 'vlc'
 cask 'xtrafinder'
 
-mas 'Magic Calculator', id: 421993158
-mas 'Memory Clean', id: 451444120
-mas 'ColorSnapper2', id: 969418666
-mas 'Patterns', id: 429449079
-mas 'iA Writer Classic', id: 439623248
-mas 'Osfoora', id: 502401238
-mas 'IP Scanner Home', id: 422293948
-mas 'Annotate', id: 918207447
-mas 'LittleIpsum', id: 405772121
-mas 'Key Codes', id: 414568915
-mas 'djay', id: 411699771
-mas 'Amphetamine', id: 937984704
-mas 'The Unarchiver', id: 425424353
-mas 'Pocket', id: 568494494
-mas 'Wunderlist', id: 410628904
-mas 'Byword', id: 420212497
-mas 'Marked 2', id: 890031187
-mas 'Pages', id: 409201541
-mas 'TimeKeeper', id: 423293264
-mas 'Slack', id: 803453959
-mas 'Fantastical 2', id: 975937182
-mas 'Type Fu', id: 509818877
-mas 'BasicSportsTimer', id: 1123595107
-mas 'DaisyDisk', id: 411643860
 mas '1Password', id: 443987910
-mas 'Keynote', id: 409183694
+mas 'Amphetamine', id: 937984704
+mas 'Annotate', id: 918207447
+mas 'BasicSportsTimer', id: 1123595107
 mas 'Bear', id: 1091189122
+mas 'Byword', id: 420212497
+mas 'ColorSnapper2', id: 969418666
+mas 'DaisyDisk', id: 411643860
+mas 'djay', id: 411699771
+mas 'Fantastical 2', id: 975937182
+mas 'iA Writer Classic', id: 439623248
+mas 'IP Scanner Home', id: 422293948
+mas 'Key Codes', id: 414568915
+mas 'Keynote', id: 409183694
+mas 'LittleIpsum', id: 405772121
+mas 'Magic Calculator', id: 421993158
+mas 'Marked 2', id: 890031187
+mas 'Memory Clean', id: 451444120
+mas 'Pages', id: 409201541
+mas 'Patterns', id: 429449079
+mas 'Pocket', id: 568494494
+mas 'Slack', id: 803453959
+mas 'The Unarchiver', id: 425424353
+mas 'TimeKeeper', id: 423293264
+mas 'Type Fu', id: 509818877
+mas 'Wunderlist', id: 410628904
