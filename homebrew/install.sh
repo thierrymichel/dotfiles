@@ -21,6 +21,7 @@ then
 
 fi
 
+echo "› installers:homebrew"
 echo "  Already installed…"
 
 exit 0
