@@ -274,6 +274,9 @@ defaults write com.apple.dock no-bouncing -bool true
 # Display only open/active applications
 defaults write com.apple.dock static-only -bool true
 
+# Set icons size
+defaults write com.apple.dock tilesize -int 32
+
 # Remove everything
 dockutil --no-restart --remove all
 
