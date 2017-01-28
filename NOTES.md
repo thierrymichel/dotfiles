@@ -35,9 +35,13 @@ Password before 'casking'… -> bootstrap relaunched :/
 
 ## MacOS defauls
 
-`dockutil` not found
+`dockutil` not found -> install before via Homebrew
 
 ## Installers
 
+`nvm` is not correctly loaded…
 
 -----
+
+SSH keys migrations ?
+Apps prefs ?
