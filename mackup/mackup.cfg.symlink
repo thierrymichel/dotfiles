@@ -1,6 +1,6 @@
 [storage]
 engine = file_system
-path = /Volumes/Data/Dropbox (Personnelle)
+Path = Dropbox (Personnelle)
 directory = Mackup
 
 [applications_to_sync]
@@ -17,7 +17,4 @@ sublime-text-3
 transmit
 wakatime
 xtrafinder
-
-[configuration_files]
-.config/micro/settings.json
-.config/robomongo/robomongo.json
+my-config
