@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="Epic Drupal">
+	<description>EPIC Drupal coding standards</description>
+	<rule ref="Drupal">
+		<exclude name="Drupal.ControlStructures.ControlSignature.NewlineAfterCloseBrace" />
+	</rule>
+</ruleset>
