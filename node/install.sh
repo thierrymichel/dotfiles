@@ -23,6 +23,7 @@ packages=(
   vue-cli
   eslint
   babel-eslint
+  sass-lint
   jscs
   ava
   json-server
