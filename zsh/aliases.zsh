@@ -1,4 +1,4 @@
-alias reload!='. ~/.zshrc'
+alias reload='. ~/.zshrc'
 alias cls='clear' # Good 'ol Clear Screen command
 
 # Easier navigation: .., ..., ...., ....., ~ and -
@@ -26,7 +26,10 @@ alias st='subl .'
 # Webserver
 alias server='python -m SimpleHTTPServer 8000'
 alias jsonserver='json-server --watch dev/db.json'
-alias remote='sshfs www-data@tmi.epic-sys.io:/var/www/ ~/Mount -ovolname=TMI -p 2214'
+# https://osxfuse.github.io/
+# https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh
+alias remote='sshfs tmi@devbox.epic-sys.io:/home/tmi ~/Mount -p 22 -ovolname=DEVBOX -o auto_cache,reconnect,defer_permissions,noappledouble'
+alias unremote='sudo umount ~/Mount'
 
 # Get week number
 alias week='date +%V'
