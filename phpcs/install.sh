@@ -20,5 +20,9 @@ sudo php -d detect_unicode=0 go-pear.phar
 # include_path = ".:/Users/tm/pear/share/pear/"
 # Install phpcs
 pear install PHP_codesniffer
+# Reload path
+source ~/.zshrc
+# Add standards folder to config
+sudo phpcs --config-set installed_paths ~/.phpcs
 
 fi
