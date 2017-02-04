@@ -2,7 +2,27 @@
 #
 # update things.
 
-echo 'TODO…'
+export ZSH=$HOME/.dotfiles
+
+source scripts/dotfiles
+
+set -e
+
+cd "$(dirname $0)"/..
+
+echo "› brew update"
+brew update
+brew doctor
+brew upgrade
+
+# Refresh macOS defaults
+echo "› Mac OS defaults"
+macos/defaults.sh
+
+echo "› installers"
+export ENV="update"
+# find the installers and run them iteratively
+find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
 
 echo ''
 echo '  Ze end!'

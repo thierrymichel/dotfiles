@@ -6,17 +6,21 @@ set -e
 
 cd "$(dirname $0)"/..
 
+# First package managers
+
 echo "› nvm"
+echo "  Installing nvm for you."
 # Install nvm + latest
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 
 # Install homebrew
 homebrew/install.sh 2>&1
 
-# Run Homebrew through the Brewfile
+Run Homebrew through the Brewfile
 echo "› brew bundle"
 brew bundle
 
+# Second OS related stuff
 # Set macOS defaults
 echo "› Mac OS defaults"
 macos/defaults.sh
@@ -25,6 +29,7 @@ echo "› installers"
 # find the installers and run them iteratively
 find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
 
+# Third, ZSH
 echo "› Set ZSH as default"
 chsh -s $(which zsh)
 

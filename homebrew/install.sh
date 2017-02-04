@@ -5,6 +5,8 @@
 # This installs some of the common dependencies needed (or at least desired)
 # using Homebrew.
 
+echo "› installers:homebrew"
+
 # Check for Homebrew
 if test ! $(which brew)
 then
@@ -18,10 +20,7 @@ then
   then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
   fi
-
 fi
 
-echo "› installers:homebrew"
 echo "  Already installed…"
-
 exit 0

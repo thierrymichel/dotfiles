@@ -8,30 +8,39 @@ echo "› installers:node"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
-nvm install --lts
-nvm use --lts
+if [ "$ENV" = 'update' ]
+then
+  echo '  update'
+  nvm use --lts
+  npm update -g
+else
+  echo '  install'
 
-NODE_VERSION=$(node -v)
-nvm alias default $NODE_VERSION
+  nvm install --lts
+  nvm use --lts
 
-npm update npm -g
+  NODE_VERSION=$(node -v)
+  nvm alias default $NODE_VERSION
 
-packages=(
-  david
-  yo
-  gulp-cli
-  vue-cli
-  eslint
-  babel-eslint
-  sass-lint
-  jscs
-  ava
-  json-server
-  np
-  spoof
-)
+  npm update npm -g
 
-npm install -g "${packages[@]}"
+  packages=(
+    david
+    yo
+    gulp-cli
+    vue-cli
+    eslint
+    babel-eslint
+    sass-lint
+    jscs
+    ava
+    json-server
+    np
+    spoof
+  )
+
+  npm install -g "${packages[@]}"
+fi
 
 
 # if test ! $(which spoof)
