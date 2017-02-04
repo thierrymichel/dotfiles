@@ -1,3 +1,34 @@
+# Antigen
+# Load Antigen
+source $(brew --prefix)/share/antigen/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# oh-my-zsh's plugins.
+antigen bundle git
+antigen bundle arialdomartini/oh-my-git
+# antigen bundle sublime
+# antigen bundle command-not-found
+# antigen bundle gulp
+# antigen bundle marked2
+# antigen bundle npm
+# antigen bundle nvm
+# antigen bundle node
+# antigen bundle osx
+antigen bundle horosgrisa/autoenv
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load the theme.
+# antigen theme robbyrussell
+antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
+
+# Tell antigen that you're done.
+antigen apply
+
+
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
@@ -37,36 +68,6 @@ done
 
 unset config_files
 
-
-# # Antigen
-# # Load Antigen
-# source /usr/local/share/antigen/antigen.zsh
-
-# # Load the oh-my-zsh's library.
-# antigen use oh-my-zsh
-
-# # oh-my-zsh's plugins.
-# antigen bundle git
-# antigen bundle arialdomartini/oh-my-git
-# # antigen bundle sublime
-# # antigen bundle command-not-found
-# # antigen bundle gulp
-# # antigen bundle marked2
-# # antigen bundle npm
-# # antigen bundle nvm
-# # antigen bundle node
-# # antigen bundle osx
-# antigen bundle horosgrisa/autoenv
-
-# # Syntax highlighting bundle.
-# antigen bundle zsh-users/zsh-syntax-highlighting
-
-# # Load the theme.
-# # antigen theme robbyrussell
-# antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
-
-# # Tell antigen that you're done.
-# antigen apply
 
 # EXTRA stuff
 # From @hugues
