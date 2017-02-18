@@ -30,7 +30,7 @@
   ui = true
 [core]
   excludesfile = ~/.gitignore_global
-  editor = micro
+  editor = code --wait
 [apply]
   whitespace = nowarn
 [help]
