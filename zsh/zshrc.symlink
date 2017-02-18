@@ -8,15 +8,17 @@ antigen use oh-my-zsh
 # oh-my-zsh's plugins.
 antigen bundle git
 antigen bundle arialdomartini/oh-my-git
-# antigen bundle sublime
-# antigen bundle command-not-found
+antigen bundle command-not-found
+antigen bundle emoji
 # antigen bundle gulp
 # antigen bundle marked2
+# antigen bundle node
 # antigen bundle npm
 # antigen bundle nvm
-# antigen bundle node
 # antigen bundle osx
+# antigen bundle sublime
 antigen bundle horosgrisa/autoenv
+antigen bundle mollifier/zload
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -28,6 +30,9 @@ antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
 # Tell antigen that you're done.
 antigen apply
 
+# EPIC zsh toolbox
+export EPIC_ZSH_FUNCTIONS="newp work"
+antigen bundle https://git.epic.net/epic-toolbox/epic-zsh.git
 
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
