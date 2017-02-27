@@ -37,6 +37,10 @@ antigen bundle https://git.epic.net/epic-toolbox/epic-zsh.git
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
+# Setting locale for terminal
+LC_CTYPE=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
 # you'll have access to them in your scripts.

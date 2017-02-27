@@ -11,15 +11,20 @@ alias -- -='cd -'
 
 # Shortcuts
 alias home='cd ~'
+alias dt='cd ~/Desktop'
+alias dl='cd ~/Downloads'
 alias s='cd ~/Sites'
-alias d='cd ~/Designs'  
+alias d='cd ~/Designs'
+alias epic='cd ~/Epic'
+## Projects
 alias p='cd ~/Projects'
 alias pj='cd ~/Projects'
-alias dl='cd ~/Downloads'
-alias dt='cd ~/Desktop'
+alias pulse='cd ~/Projects/Pulse/pulse'
+alias heaj='cd ~/Projects/heaj'
+## Remote aliased folders
 alias data='cd -P ~/Data'
-alias epic='cd ~/Epic'
 alias gh='cd -P ~/GitHub'
+## Applications
 alias µ='micro'
 alias st='subl .'
 
