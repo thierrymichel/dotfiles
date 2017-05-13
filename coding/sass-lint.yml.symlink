@@ -104,7 +104,10 @@ rules:
     - 1
     -
       length: 400
-  max-line-length: 1
+  max-line-length:
+    - 1
+    -
+      length: 120
   property-sort-order:
     - 1
     - order:

@@ -65,7 +65,7 @@
     }],
     "lines-around-directive": 2,
     "max-depth": 2,
-    "max-len": [2, { "code": 80 }],
+    "max-len": [2, { "code": 120 }],
     "max-nested-callbacks": 2,
     "max-statements-per-line": [2, { "max": 2 }],
     "new-cap": 2,
