@@ -7,7 +7,7 @@
 #
 # Run ./defaults.sh and you'll be good to go.
 
-COMPUTER_NAME="thulium"
+COMPUTER_NAME="thierry-mbp"
 
 osascript -e 'tell application "System Preferences" to quit'
 
@@ -275,7 +275,7 @@ defaults write com.apple.dock no-bouncing -bool true
 defaults write com.apple.dock static-only -bool true
 
 # Set icons size
-defaults write com.apple.dock tilesize -int 32
+defaults write com.apple.dock tilesize -int 16
 
 # Remove everything
 dockutil --no-restart --remove all
