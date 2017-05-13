@@ -25,21 +25,24 @@ else
   npm update npm -g
 
   packages=(
-    david
-    yo
-    gulp-cli
-    vue-cli
-    eslint
-    babel-eslint
-    sass-lint
-    jscs
     ava
+    avn
+    avn-nvm
+    babel-eslint
+    david
+    eslint
+    gulp-cli
     json-server
     np
+    sass-lint
     spoof
+    vue-cli
+    yo
   )
 
   npm install -g "${packages[@]}"
+
+  avn setup
 fi
 
 
