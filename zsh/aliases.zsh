@@ -33,7 +33,7 @@ alias server='python -m SimpleHTTPServer 8000'
 alias jsonserver='json-server --watch dev/db.json'
 # https://osxfuse.github.io/
 # https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh
-alias remote='sshfs tmi@devbox.epic-sys.io:/home/tmi ~/Mount -p 22 -o auto_cache,reconnect,defer_permissions,noappledouble,volname=Devbox'
+alias remote='sshfs tmi@devbox.epic-sys.io:/home/tmi ~/Mount -p 22 -o auto_cache,reconnect,defer_permissions,noappledouble,volname=tmi'
 alias unremote='sudo umount ~/Mount'
 
 # Get week number
