@@ -77,6 +77,7 @@ cask 'spectacle'
 cask 'transmit'
 cask 'unrarx'
 cask 'utorrent'
+cask 'visual-studio-code'
 cask 'vlc'
 cask 'xtrafinder'
 
