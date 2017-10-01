@@ -64,7 +64,8 @@ deploy() {
 alias listaliases="alias | sed 's/=.*//'"
 alias listfunctions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'" # show non _prefixed functions
 
-# npm
+# node / npm
+alias ng="export NODE_PATH=`npm root -g`" # NODE_PATH for requiring global modules
 alias ni="npm install"
 alias nun="npm uninstall"
 alias nup="npm update"
