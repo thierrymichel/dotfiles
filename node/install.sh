@@ -36,6 +36,7 @@ else
     np
     sass-lint
     spoof
+    vsce
     vue-cli
     yo
   )
