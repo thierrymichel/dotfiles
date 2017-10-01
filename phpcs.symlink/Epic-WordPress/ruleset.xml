@@ -4,21 +4,37 @@
 
   <rule ref="WordPress-Core">
     <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
+    <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceAfterOpenParenthesis" />
+    <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceBeforeCloseParenthesis" />
+    <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen" />
+    <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose" />
   </rule>
   <rule ref="PEAR">
+    <exclude name="PEAR.Commenting.FileComment.Missing" />
     <exclude name="PEAR.Commenting.FileComment.MissingVersion" />
     <exclude name="PEAR.Commenting.FileComment.MissingCategoryTag" />
-    <exclude name="PEAR.Commenting.FileComment.MissingLinkTag" />
     <exclude name="PEAR.Commenting.FileComment.MissingLicenseTag" />
+    <exclude name="PEAR.Commenting.ClassComment.MissingLinkTag" />
+    <exclude name="PEAR.Commenting.ClassComment.MissingVersion" />
+    <exclude name="PEAR.Commenting.ClassComment.MissingCategoryTag" />
+    <exclude name="PEAR.Commenting.ClassComment.MissingLicenseTag" />
     <exclude name="PEAR.NamingConventions.ValidFunctionName.FunctionNoCapital" />
     <exclude name="PEAR.WhiteSpace.ScopeIndent" />
     <exclude name="PEAR.Functions.FunctionCallSignature.Indent" />
     <exclude name="PEAR.Functions.FunctionDeclaration.BraceOnSameLine"/>
     <exclude name="PEAR.ControlStructures.MultiLineCondition.SpacingAfterOpenBrace" />
+    <exclude name="PEAR.Classes.ClassDeclaration.OpenBraceNewLine" />
+    <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore" />
   </rule>
   <rule ref="Generic.WhiteSpace.ScopeIndent">
    <properties>
     <property name="indent" value="2"/>
    </properties>
   </rule>
+  <rule ref="Generic.Files.LineLength">
+    <properties>
+     <property name="lineLimit" value="200"/>
+     <property name="absoluteLineLimit" value="0"/>
+   </properties>
+ </rule>
 </ruleset>
