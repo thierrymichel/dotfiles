@@ -15,7 +15,7 @@
     "array-callback-return": 2,
     "array-bracket-spacing": 2,
     "arrow-body-style": 2,
-    "arrow-parens": 2,
+    "arrow-parens": [2, "as-needed"],
     "arrow-spacing": 2,
     "block-scoped-var": 2,
     "block-spacing": 2,
@@ -100,7 +100,7 @@
     "no-lone-blocks": 2,
     "no-lonely-if": 2,
     "no-loop-func": 2,
-    "no-magic-numbers": [2, {
+    "no-magic-numbers": [0, {
       "ignore": [0, 1],
       "ignoreArrayIndexes": true
     }],
