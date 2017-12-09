@@ -1,5 +1,6 @@
 alias reload='. ~/.zshrc'
 alias cls='clear' # Good 'ol Clear Screen command
+alias c='clear'
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..='cd ..'
@@ -15,7 +16,7 @@ alias dt='cd ~/Desktop'
 alias dl='cd ~/Downloads'
 alias s='cd ~/Sites'
 alias d='cd ~/Designs'
-alias epic='cd ~/Epic'
+alias dev='cd -P ~/Devbox'
 ## Projects
 alias p='cd ~/Projects'
 alias pj='cd ~/Projects'
@@ -71,9 +72,6 @@ ng() {
 alias ni="npm install"
 alias nun="npm uninstall"
 alias nup="npm update"
-
-# PHP MAMP
-alias phpmamp='/Applications/MAMP/bin/php/php5.5.14/bin/php'
 
 # EPIC
 alias tmi='ssh tmi'
