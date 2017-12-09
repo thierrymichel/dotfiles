@@ -1,2 +1,2 @@
-export EDITOR="subl -w"
-export EDITOR_NOWAIT="subl"
+export EDITOR="code -w"
+export EDITOR_NOWAIT="code"
