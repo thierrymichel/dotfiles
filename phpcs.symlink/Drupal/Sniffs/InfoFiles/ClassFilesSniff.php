@@ -2,8 +2,6 @@
 /**
  * Drupal_Sniffs_InfoFiles_ClassFilesSniff.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -40,16 +38,14 @@ class Drupal_Sniffs_InfoFiles_ClassFilesSniff implements PHP_CodeSniffer_Sniff
      * @param int                  $stackPtr  The position of the current token in the
      *                                        stack passed in $tokens.
      *
-     * @return void
+     * @return int
      */
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
         // Only run this sniff once per info file.
-        $end = (count($phpcsFile->getTokens()) + 1);
-
         $fileExtension = strtolower(substr($phpcsFile->getFilename(), -4));
         if ($fileExtension !== 'info') {
-            return $end;
+            return ($phpcsFile->numTokens + 1);
         }
 
         $contents = file_get_contents($phpcsFile->getFilename());
@@ -70,7 +66,9 @@ class Drupal_Sniffs_InfoFiles_ClassFilesSniff implements PHP_CodeSniffer_Sniff
                 // a class or interface definition.
                 $searchTokens = token_get_all(file_get_contents($fileName));
                 foreach ($searchTokens as $token) {
-                    if (is_array($token) === true && ($token[0] === T_CLASS || $token[0] === T_INTERFACE)) {
+                    if (is_array($token) === true
+                        && in_array($token[0], array(T_CLASS, T_INTERFACE, T_TRAIT)) === true
+                    ) {
                         continue 2;
                     }
                 }
@@ -81,7 +79,7 @@ class Drupal_Sniffs_InfoFiles_ClassFilesSniff implements PHP_CodeSniffer_Sniff
             }//end foreach
         }//end if
 
-        return $end;
+        return ($phpcsFile->numTokens + 1);
 
     }//end process()
 
@@ -138,12 +136,17 @@ class Drupal_Sniffs_InfoFiles_ClassFilesSniff implements PHP_CodeSniffer_Sniff
             $data,
             $matches,
             PREG_SET_ORDER
-        )) {
+        ) !== false
+        ) {
             foreach ($matches as $match) {
                 // Fetch the key and value string.
                 $i = 0;
                 foreach (array('key', 'value1', 'value2', 'value3') as $var) {
-                    $$var = isset($match[++$i]) ? $match[$i] : '';
+                    if (isset($match[++$i]) === true) {
+                        $$var = $match[$i];
+                    } else {
+                        $$var = '';
+                    }
                 }
 
                 $value = stripslashes(substr($value1, 1, -1)).stripslashes(substr($value2, 1, -1)).$value3;
@@ -155,11 +158,11 @@ class Drupal_Sniffs_InfoFiles_ClassFilesSniff implements PHP_CodeSniffer_Sniff
 
                 // Create nested arrays.
                 foreach ($keys as $key) {
-                    if ($key == '') {
+                    if ($key === '') {
                         $key = count($parent);
                     }
 
-                    if (!isset($parent[$key]) || !is_array($parent[$key])) {
+                    if (isset($parent[$key]) === false || is_array($parent[$key]) === false) {
                         $parent[$key] = array();
                     }
 
@@ -167,12 +170,12 @@ class Drupal_Sniffs_InfoFiles_ClassFilesSniff implements PHP_CodeSniffer_Sniff
                 }
 
                 // Handle PHP constants.
-                if (isset($constants[$value])) {
+                if (isset($constants[$value]) === true) {
                     $value = $constants[$value];
                 }
 
                 // Insert actual value.
-                if ($last == '') {
+                if ($last === '') {
                     $last = count($parent);
                 }
 

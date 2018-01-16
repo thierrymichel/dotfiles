@@ -2,8 +2,6 @@
 /**
  * Drupal_Sniffs_ControlStructures_InlineControlStructureSniff.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -40,7 +38,7 @@ extends Generic_Sniffs_ControlStructures_InlineControlStructureSniff
         $tokens = $phpcsFile->getTokens();
 
         // Check for the alternate syntax for control structures with colons (:).
-        if (isset($tokens[$stackPtr]['parenthesis_closer'])) {
+        if (isset($tokens[$stackPtr]['parenthesis_closer']) === true) {
             $start = $tokens[$stackPtr]['parenthesis_closer'];
         } else {
             $start = $stackPtr;

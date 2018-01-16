@@ -2,8 +2,6 @@
 /**
  * Drupal_Sniffs_NamingConventions_ValidFunctionNameSniff.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -95,6 +93,14 @@ class Drupal_Sniffs_NamingConventions_ValidFunctionNameSniff extends Generic_Sni
         $functionName = $phpcsFile->getDeclarationName($stackPtr);
         if ($functionName === null) {
             // Ignore closures.
+            return;
+        }
+
+        $isApiFile     = substr($phpcsFile->getFilename(), -8) === '.api.php';
+        $isHookExample = substr($functionName, 0, 5) === 'hook_';
+        if ($isApiFile === true && $isHookExample === true) {
+            // Ignore for examaple hook_ENTITY_TYPE_insert() functions in .api.php
+            // files.
             return;
         }
 

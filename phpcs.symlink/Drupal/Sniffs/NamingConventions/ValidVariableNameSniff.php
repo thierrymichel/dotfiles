@@ -2,8 +2,6 @@
 /**
  * Drupal_Sniffs_NamingConventions_ValidVariableNameSniff.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -44,11 +42,28 @@ class Drupal_Sniffs_NamingConventions_ValidVariableNameSniff
 
         $memberName = ltrim($tokens[$stackPtr]['content'], '$');
 
-        if (strpos($memberName, '_') !== false) {
-            $error = 'Class property %s should use lowerCamel naming without underscores';
-            $data  = array($tokens[$stackPtr]['content']);
-            $phpcsFile->addError($error, $stackPtr, 'LowerCamelName', $data);
+        if (strpos($memberName, '_') === false) {
+            return;
         }
+
+        // Check if the class extends another class and get the name of the class
+        // that is extended.
+        if (empty($tokens[$stackPtr]['conditions']) === false) {
+            $classPtr    = key($tokens[$stackPtr]['conditions']);
+            $extendsName = $phpcsFile->findExtendedClassName($classPtr);
+
+            // Special case config entities: those are allowed to have underscores in
+            // their class property names. If a class extends something like
+            // ConfigEntityBase then we consider it a config entity class and allow
+            // underscores.
+            if ($extendsName !== false && strpos($extendsName, 'ConfigEntity') !== false) {
+                return;
+            }
+        }
+
+        $error = 'Class property %s should use lowerCamel naming without underscores';
+        $data  = array($tokens[$stackPtr]['content']);
+        $phpcsFile->addError($error, $stackPtr, 'LowerCamelName', $data);
 
     }//end processMemberVar()
 
@@ -89,9 +104,9 @@ class Drupal_Sniffs_NamingConventions_ValidVariableNameSniff
             return;
         }
 
-        if (preg_match('/[A-Z]/', $varName)) {
-            $error = "Variable \"$varName\" is camel caps format. do not use mixed case (camelCase), use lower case and _";
-            $phpcsFile->addError($error, $stackPtr);
+        if (preg_match('/^[A-Z]/', $varName) === 1) {
+            $error = "Variable \"$varName\" starts with a capital letter, but only \$lowerCamelCase or \$snake_case is allowed";
+            $phpcsFile->addError($error, $stackPtr, 'LowerStart');
         }
 
     }//end processVariable()
@@ -108,6 +123,7 @@ class Drupal_Sniffs_NamingConventions_ValidVariableNameSniff
     protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
         // We don't care about variables in strings.
+        return;
 
     }//end processVariableInString()
 

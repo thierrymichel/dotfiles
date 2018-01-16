@@ -2,8 +2,6 @@
 /**
  * Drupal_Sniffs_Files_LineLengthSniff.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -58,13 +56,13 @@ class Drupal_Sniffs_Files_LineLengthSniff extends Generic_Sniffs_Files_LineLengt
             }
 
             if ($tokens[($stackPtr - 1)]['code'] === T_COMMENT
+                // Allow @link and @see documentation to exceed the 80 character
+                // limit.
                 && (preg_match('/^[[:space:]]*\/\/ @.+/', $tokens[($stackPtr - 1)]['content']) === 1
                 // Allow anything that does not contain spaces (like URLs) to be
                 // longer.
                 || strpos(trim($tokens[($stackPtr - 1)]['content'], "/ \n"), ' ') === false)
             ) {
-                // Allow @link and @see documentation to exceed the 80 character
-                // limit.
                 return;
             }
 
@@ -85,7 +83,15 @@ class Drupal_Sniffs_Files_LineLengthSniff extends Generic_Sniffs_Files_LineLengt
                 // characters.
                 || strpos($tokens[($stackPtr - 2)]['content'], ' ') === false
                 // Allow long "Contains ..." comments in @file doc blocks.
-                || preg_match('/^Contains [a-zA-Z\\\\.]+$/', $tokens[($stackPtr - 2)]['content']) === 1)
+                || preg_match('/^Contains [a-zA-Z_\\\\.]+$/', $tokens[($stackPtr - 2)]['content']) === 1
+                // Allow long paths or namespaces in annotations such as
+                // "list_builder" = "Drupal\rules\Entity\Controller\RulesReactionListBuilder"
+                // cardinality = \Drupal\webform\WebformHandlerInterface::CARDINALITY_UNLIMITED.
+                || preg_match('#= ("|\')?\S+[\\\\/]\S+("|\')?,*$#', $tokens[($stackPtr - 2)]['content']) === 1)
+                // Allow @link tags in lists.
+                || strpos($tokens[($stackPtr - 2)]['content'], '- @link') !== false
+                // Allow hook implementation line to exceed 80 characters.
+                || preg_match('/^Implements hook_[a-zA-Z0-9_]+\(\)/', $tokens[($stackPtr - 2)]['content']) === 1
             ) {
                 return;
             }
@@ -99,7 +105,10 @@ class Drupal_Sniffs_Files_LineLengthSniff extends Generic_Sniffs_Files_LineLengt
     /**
      * Returns the length of a defined line.
      *
-     * @return integer
+     * @param PHP_CodeSniffer_File $phpcsFile   The file being scanned.
+     * @param int                  $currentLine The current line.
+     *
+     * @return int
      */
     public function getLineLength(PHP_CodeSniffer_File $phpcsFile, $currentLine)
     {

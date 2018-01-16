@@ -2,15 +2,13 @@
 /**
  * DrupalPractice_Sniffs_General_AccessAdminPagesSniff
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
  */
 
 /**
- * Throws a waring if the "access adiminstration pages" string is found in
+ * Throws a warning if the "access administration pages" string is found in
  * hook_menu().
  *
  * @category PHP

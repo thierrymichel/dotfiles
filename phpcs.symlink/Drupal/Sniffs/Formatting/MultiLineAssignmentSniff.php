@@ -2,8 +2,6 @@
 /**
  * PEAR_Sniffs_Functions_FunctionDeclarationSniff.
  *
- * PHP version 5
- *
  * @category  PHP
  * @package   PHP_CodeSniffer
  * @author    Greg Sherwood <gsherwood@squiz.net>
@@ -58,12 +56,6 @@ class Drupal_Sniffs_Formatting_MultiLineAssignmentSniff implements PHP_CodeSniff
         $next = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
         if ($next === false) {
             // Bad assignment.
-            return;
-        }
-
-        if ($tokens[$next]['line'] !== $tokens[$stackPtr]['line']) {
-            $error = 'Multi-line assignments must have the equal sign on the second line';
-            $phpcsFile->addError($error, $stackPtr);
             return;
         }
 

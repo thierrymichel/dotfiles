@@ -2,8 +2,6 @@
 /**
  * Drupal_Sniffs_Functions_FunctionDeclarationSniff.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -12,6 +10,9 @@
 /**
  * Ensure that there is only one space after the function keyword and no space
  * before the opening parenthesis.
+ *
+ * @deprecated in Coder 8.x, will be removed in Coder 9.x.
+ * Squiz.Functions.MultiLineFunctionDeclaration is used instead, see ruleset.xml.
  *
  * @category PHP
  * @package  PHP_CodeSniffer

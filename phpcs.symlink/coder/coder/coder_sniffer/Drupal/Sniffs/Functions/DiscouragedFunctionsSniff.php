@@ -2,8 +2,6 @@
 /**
  * Drupal_Sniffs_Functions_DiscouragedFunctionsSniff.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -46,6 +44,11 @@ class Drupal_Sniffs_Functions_DiscouragedFunctionsSniff extends Generic_Sniffs_P
                                   'kpr'                 => null,
                                   'kprint_r'            => null,
                                   'sdpm'                => null,
+                                  // Functions which are not available on all
+                                  // PHP builds.
+                                  'fnmatch'             => null,
+                                  // Functions which are a security risk.
+                                  'eval'                => null,
                                  );
 
     /**

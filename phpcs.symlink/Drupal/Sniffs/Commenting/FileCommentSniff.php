@@ -2,8 +2,6 @@
 /**
  * Parses and verifies the doc comments for files.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -66,14 +64,71 @@ class Drupal_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         $tokens       = $phpcsFile->getTokens();
         $commentStart = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
 
+        // Files containing exactly one class, interface or trait are allowed to
+        // ommit a file doc block. If a namespace is used then the file comment must
+        // be omitted.
+        $oopKeyword = $phpcsFile->findNext([T_CLASS, T_INTERFACE, T_TRAIT], $stackPtr);
+        if ($oopKeyword !== false) {
+            $namespace = $phpcsFile->findNext(T_NAMESPACE, $stackPtr);
+            // Check if the file contains multiple classes/interfaces/traits - then a
+            // file doc block is allowed.
+            $secondOopKeyword = $phpcsFile->findNext([T_CLASS, T_INTERFACE, T_TRAIT], ($oopKeyword + 1));
+            // Namespaced classes, interfaces and traits should not have an @file doc
+            // block.
+            if (($tokens[$commentStart]['code'] === T_DOC_COMMENT_OPEN_TAG
+                || $tokens[$commentStart]['code'] === T_COMMENT)
+                && $secondOopKeyword === false
+                && $namespace !== false
+            ) {
+                $fix = $phpcsFile->addFixableError('Namespaced classes, interfaces and traits should not begin with a file doc comment', $commentStart, 'NamespaceNoFileDoc');
+                if ($fix === true) {
+                    $phpcsFile->fixer->beginChangeset();
+
+                    for ($i = $commentStart; $i <= ($tokens[$commentStart]['comment_closer'] + 1); $i++) {
+                        $phpcsFile->fixer->replaceToken($i, '');
+                    }
+
+                    // If, after removing the comment, there are two new lines
+                    // remove them.
+                    if ($tokens[($commentStart - 1)]['content'] === "\n" && $tokens[$i]['content'] === "\n") {
+                        $phpcsFile->fixer->replaceToken($i, '');
+                    }
+
+                    $phpcsFile->fixer->endChangeset();
+                }
+            }
+
+            if ($namespace !== false) {
+                return ($phpcsFile->numTokens + 1);
+            }
+
+            // Search for global functions before and after the class.
+            $function = $phpcsFile->findPrevious(T_FUNCTION, ($oopKeyword - 1));
+            if ($function === false) {
+                $function = $phpcsFile->findNext(T_FUNCTION, ($tokens[$oopKeyword]['scope_closer'] + 1));
+            }
+
+            $fileTag = $phpcsFile->findNext(T_DOC_COMMENT_TAG, ($commentStart + 1), null, false, '@file');
+
+            // No other classes, no other global functions and no explicit @file tag
+            // anywhere means it is ok to skip the file comment.
+            if ($secondOopKeyword === false && $function === false && $fileTag === false) {
+                return ($phpcsFile->numTokens + 1);
+            }
+        }//end if
+
         if ($tokens[$commentStart]['code'] === T_COMMENT) {
             $fix = $phpcsFile->addFixableError('You must use "/**" style comments for a file comment', $commentStart, 'WrongStyle');
             if ($fix === true) {
                 $content = $tokens[$commentStart]['content'];
 
-                // Just turn the /* ... */ style comment into a /** ... */ style
-                // comment.
-                if (strpos($content, '/*') === 0) {
+                // If the comment starts with something like "/**" then we just
+                // insert a space after the stars.
+                if (strpos($content, '/**') === 0) {
+                    $phpcsFile->fixer->replaceToken($commentStart, str_replace('/**', '/** ', $content));
+                } else if (strpos($content, '/*') === 0) {
+                    // Just turn the /* ... */ style comment into a /** ... */ style
+                    // comment.
                     $phpcsFile->fixer->replaceToken($commentStart, str_replace('/*', '/**', $content));
                 } else {
                     $content = trim(ltrim($tokens[$commentStart]['content'], '/# '));
@@ -83,12 +138,18 @@ class Drupal_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 
             return ($phpcsFile->numTokens + 1);
         } else if ($commentStart === false || $tokens[$commentStart]['code'] !== T_DOC_COMMENT_OPEN_TAG) {
-            $fix = $phpcsFile->addFixableError('Missing file doc comment', $stackPtr, 'Missing');
+            $fix = $phpcsFile->addFixableError('Missing file doc comment', 0, 'Missing');
             if ($fix === true) {
                 // Only PHP has a real opening tag, additional newline at the
                 // beginning here.
                 if ($phpcsFile->tokenizerType === 'PHP') {
-                    $phpcsFile->fixer->addContent($stackPtr, "\n/**\n * @file\n */\n");
+                    // In templates add the file doc block to the very beginning of
+                    // the file.
+                    if ($tokens[0]['code'] === T_INLINE_HTML) {
+                        $phpcsFile->fixer->addContentBefore(0, "<?php\n\n/**\n * @file\n */\n?>\n");
+                    } else {
+                        $phpcsFile->fixer->addContent($stackPtr, "\n/**\n * @file\n */\n");
+                    }
                 } else {
                     $phpcsFile->fixer->addContent($stackPtr, "/**\n * @file\n */\n");
                 }
@@ -103,23 +164,24 @@ class Drupal_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 
         // If there is no @file tag and the next line is a function or class
         // definition then the file docblock is mising.
-        if ($fileTag === false
-            && $tokens[$next]['line'] === ($tokens[$commentEnd]['line'] + 1)
-            && in_array($tokens[$next]['code'], array(T_FUNCTION, T_CLASS, T_INTERFACE, T_TRAIT))
+        if ($tokens[$next]['line'] === ($tokens[$commentEnd]['line'] + 1)
+            && $tokens[$next]['code'] === T_FUNCTION
         ) {
-            $fix = $phpcsFile->addFixableError('Missing file doc comment', $stackPtr, 'Missing');
-            if ($fix === true) {
-                // Only PHP has a real opening tag, additional newline at the
-                // beginning here.
-                if ($phpcsFile->tokenizerType === 'PHP') {
-                    $phpcsFile->fixer->addContent($stackPtr, "\n/**\n * @file\n */\n");
-                } else {
-                    $phpcsFile->fixer->addContent($stackPtr, "/**\n * @file\n */\n");
+            if ($fileTag === false) {
+                $fix = $phpcsFile->addFixableError('Missing file doc comment', $stackPtr, 'Missing');
+                if ($fix === true) {
+                    // Only PHP has a real opening tag, additional newline at the
+                    // beginning here.
+                    if ($phpcsFile->tokenizerType === 'PHP') {
+                        $phpcsFile->fixer->addContent($stackPtr, "\n/**\n * @file\n */\n");
+                    } else {
+                        $phpcsFile->fixer->addContent($stackPtr, "/**\n * @file\n */\n");
+                    }
                 }
-            }
 
-            return ($phpcsFile->numTokens + 1);
-        }
+                return ($phpcsFile->numTokens + 1);
+            }
+        }//end if
 
         if ($fileTag === false || $tokens[$fileTag]['line'] !== ($tokens[$commentStart]['line'] + 1)) {
             $second_line = $phpcsFile->findNext(array(T_DOC_COMMENT_STAR, T_DOC_COMMENT_CLOSE_TAG), ($commentStart + 1), $commentEnd);
@@ -141,9 +203,44 @@ class Drupal_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         }
 
         // Exactly one blank line after the file comment.
-        if ($tokens[$next]['line'] !== ($tokens[$commentEnd]['line'] + 2) && $tokens[$next]['line'] > $tokens[$commentEnd]['line']) {
+        if ($tokens[$next]['line'] !== ($tokens[$commentEnd]['line'] + 2)
+            && $next !== false && $tokens[$next]['code'] !== T_CLOSE_TAG
+        ) {
             $error = 'There must be exactly one blank line after the file comment';
-            $phpcsFile->addError($error, $commentEnd, 'SpacingAfterComment');
+            $fix   = $phpcsFile->addFixableError($error, $commentEnd, 'SpacingAfterComment');
+            if ($fix === true) {
+                $phpcsFile->fixer->beginChangeset();
+                $uselessLine = ($commentEnd + 1);
+                while ($uselessLine < $next) {
+                    $phpcsFile->fixer->replaceToken($uselessLine, '');
+                    $uselessLine++;
+                }
+
+                $phpcsFile->fixer->addContent($commentEnd, "\n\n");
+                $phpcsFile->fixer->endChangeset();
+            }
+
+            return ($phpcsFile->numTokens + 1);
+        }
+
+        // Template file: no blank line after the file comment.
+        if ($tokens[$next]['line'] !== ($tokens[$commentEnd]['line'] + 1)
+            && $tokens[$next]['line'] > $tokens[$commentEnd]['line']
+            && $tokens[$next]['code'] === T_CLOSE_TAG
+        ) {
+            $error = 'There must be no blank line after the file comment in a template';
+            $fix   = $phpcsFile->addFixableError($error, $commentEnd, 'TeamplateSpacingAfterComment');
+            if ($fix === true) {
+                $phpcsFile->fixer->beginChangeset();
+                $uselessLine = ($commentEnd + 1);
+                while ($uselessLine < $next) {
+                    $phpcsFile->fixer->replaceToken($uselessLine, '');
+                    $uselessLine++;
+                }
+
+                $phpcsFile->fixer->addContent($commentEnd, "\n");
+                $phpcsFile->fixer->endChangeset();
+            }
         }
 
         // Ignore the rest of the file.

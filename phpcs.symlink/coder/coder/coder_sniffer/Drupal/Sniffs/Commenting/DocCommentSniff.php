@@ -2,8 +2,6 @@
 /**
  * Ensures doc blocks follow basic formatting.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -74,12 +72,13 @@ class Drupal_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
         }
 
         // Ignore doc blocks in functions, this is handled by InlineCommentSniff.
-        if (!empty($tokens[$stackPtr]['conditions']) && in_array(T_FUNCTION, $tokens[$stackPtr]['conditions'])) {
+        if (empty($tokens[$stackPtr]['conditions']) === false && in_array(T_FUNCTION, $tokens[$stackPtr]['conditions']) === true) {
             return;
         }
 
         // The first line of the comment should just be the /** code.
-        if ($tokens[$short]['line'] === $tokens[$stackPtr]['line']) {
+        // In JSDoc there are cases with @lends that are on the same line as code.
+        if ($tokens[$short]['line'] === $tokens[$stackPtr]['line'] && $phpcsFile->tokenizerType !== 'JS') {
             $error = 'The open comment tag must be the only content on the line';
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'ContentAfterOpen');
             if ($fix === true) {
@@ -116,7 +115,7 @@ class Drupal_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
         }
 
         // The short description of @file comments is one line below.
-        if ($tokens[$short]['code'] === T_DOC_COMMENT_TAG && $tokens[$short]['content'] == '@file') {
+        if ($tokens[$short]['code'] === T_DOC_COMMENT_TAG && $tokens[$short]['content'] === '@file') {
             $next = $phpcsFile->findNext($empty, ($short + 1), $commentEnd, true);
             if ($next !== false) {
                 $fileShort = $short;
@@ -126,18 +125,34 @@ class Drupal_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
 
         // Do not check defgroup sections, they have no short description. Also don't
         // check PHPUnit tests doc blocks because they might not have a description.
-        if (in_array($tokens[$short]['content'], array('@defgroup', '@addtogroup', '@}', '@coversDefaultClass'))) {
+        if (in_array($tokens[$short]['content'], array('@defgroup', '@addtogroup', '@}', '@coversDefaultClass')) === true) {
             return;
         }
 
         // Check for a comment description.
         if ($tokens[$short]['code'] !== T_DOC_COMMENT_STRING) {
+            // JSDoc has many cases of @type declaration that don't have a
+            // description.
+            if ($phpcsFile->tokenizerType === 'JS') {
+                return;
+            }
+
+            // PHPUnit test methods are allowed to skip the short description and
+            // only provide an @covers annotation.
+            if ($tokens[$short]['content'] === '@covers') {
+                return;
+            }
+
             $error = 'Missing short description in doc comment';
             $phpcsFile->addError($error, $stackPtr, 'MissingShort');
             return;
         }
 
-        $start = isset($fileShort) === true ? $fileShort : $stackPtr;
+        if (isset($fileShort) === true) {
+            $start = $fileShort;
+        } else {
+            $start = $stackPtr;
+        }
 
         // No extra newline before short description.
         if ($tokens[$short]['line'] !== ($tokens[$start]['line'] + 1)) {
@@ -167,8 +182,7 @@ class Drupal_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
             if ($fix === true) {
                 if ($tokens[($short - 1)]['code'] === T_DOC_COMMENT_WHITESPACE) {
                     $phpcsFile->fixer->replaceToken(($short - 1), ' ');
-                }
-                else {
+                } else {
                     $phpcsFile->fixer->addContent(($short - 1), ' ');
                 }
             }
@@ -202,14 +216,20 @@ class Drupal_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
             && $shortContent !== basename($phpcsFile->getFilename())
         ) {
             $error = 'Doc comment short description must start with a capital letter';
-            $fix   = $phpcsFile->addFixableError($error, $short, 'ShortNotCapital');
-            if ($fix === true) {
-                $phpcsFile->fixer->replaceToken($short, ucfirst($tokens[$short]['content']));
+            // If we cannot capitalize the first character then we don't have a
+            // fixable error.
+            if ($tokens[$short]['content'] === ucfirst($tokens[$short]['content'])) {
+                $phpcsFile->addError($error, $short, 'ShortNotCapital');
+            } else {
+                $fix = $phpcsFile->addFixableError($error, $short, 'ShortNotCapital');
+                if ($fix === true) {
+                    $phpcsFile->fixer->replaceToken($short, ucfirst($tokens[$short]['content']));
+                }
             }
         }
 
         $lastChar = substr($shortContent, -1);
-        if (in_array($lastChar, array('.', '!', '?')) === false && $shortContent !== '{@inheritdoc}'
+        if (in_array($lastChar, array('.', '!', '?', ')')) === false && $shortContent !== '{@inheritdoc}'
             // Ignore Features module export files that just use the file name as
             // comment.
             && $shortContent !== basename($phpcsFile->getFilename())
@@ -251,7 +271,9 @@ class Drupal_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
                 }
             }
 
-            if (preg_match('|\p{Lu}|u', $tokens[$long]['content'][0]) === 0) {
+            if (preg_match('|\p{Lu}|u', $tokens[$long]['content'][0]) === 0
+                && $tokens[$long]['content'] !== ucfirst($tokens[$long]['content'])
+            ) {
                 $error = 'Doc comment long description must start with a capital letter';
                 $fix   = $phpcsFile->addFixableError($error, $long, 'LongNotCapital');
                 if ($fix === true) {
@@ -306,7 +328,7 @@ class Drupal_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
         $prev     = $phpcsFile->findPrevious($empty, ($firstTag - 1), $stackPtr, true);
         // This does not apply to @file, @code, @link and @endlink tags.
         if ($tokens[$firstTag]['line'] !== ($tokens[$prev]['line'] + 2)
-            && !isset($fileShort)
+            && isset($fileShort) === false
             && in_array($tokens[$firstTag]['content'], array('@code', '@link', '@endlink')) === false
         ) {
             $error = 'There must be exactly one blank line before the tags in a doc comment';
@@ -349,7 +371,7 @@ class Drupal_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
                 }
 
                 $isNewGroup = $tokens[$prev]['line'] !== ($tokens[$tag]['line'] - 1);
-                if ($isNewGroup) {
+                if ($isNewGroup === true) {
                     $groupid++;
                 }
             }
@@ -369,10 +391,11 @@ class Drupal_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
                     $paramGroupid = $groupid;
                 }
 
-                // Every new tag section should be separated by a blank line.
-                // Exclude @code and @link.
+                // The @param, @return and @throws tag sections should be
+                // separated by a blank line both before and after these sections.
             } else if ($isNewGroup === false
-                && !in_array($currentTag, array('@code', '@endcode', '@link', '@endlink'))
+                && (in_array($currentTag, array('@param', '@return', '@throws')) === true
+                || in_array($previousTag, array('@param', '@return', '@throws')) === true)
                 && $previousTag !== $currentTag
             ) {
                 $error = 'Separate the %s and %s sections by a blank line.';
@@ -445,7 +468,10 @@ class Drupal_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
         // If there is a param group, it needs to be first; with the exception of
         // @code, @todo and link tags.
         if ($paramGroupid !== null && $paramGroupid !== 0
-            && in_array($tokens[$tokens[$commentStart]['comment_tags'][0]]['content'], array('@code', '@todo', '@link', '@endlink')) === false
+            && in_array($tokens[$tokens[$commentStart]['comment_tags'][0]]['content'], array('@code', '@todo', '@link', '@endlink', '@codingStandardsIgnoreStart')) === false
+            // In JSDoc we can have many other valid tags like @function or
+            // @constructor before the param tags.
+            && $phpcsFile->tokenizerType !== 'JS'
         ) {
             $error = 'Parameter tags must be defined first in a doc comment';
             $phpcsFile->addError($error, $tagGroups[$paramGroupid][0], 'ParamNotFirst');

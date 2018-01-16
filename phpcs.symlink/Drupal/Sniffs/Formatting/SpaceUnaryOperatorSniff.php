@@ -2,8 +2,6 @@
 /**
  * Drupal_Sniffs_Formatting_SpaceUnaryOperatorSniff.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -56,8 +54,16 @@ class Drupal_Sniffs_Formatting_SpaceUnaryOperatorSniff implements PHP_CodeSniffe
 
         // Check decrement / increment.
         if ($tokens[$stackPtr]['code'] === T_DEC || $tokens[$stackPtr]['code'] === T_INC) {
-            $modifyLeft = substr($tokens[($stackPtr - 1)]['content'], 0, 1) === '$' ||
-                          $tokens[($stackPtr + 1)]['content'] === ';';
+            $previous   = $phpcsFile->findPrevious(PHP_CodeSniffer_Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+            $modifyLeft = in_array(
+                $tokens[$previous]['code'],
+                array(
+                 T_VARIABLE,
+                 T_CLOSE_SQUARE_BRACKET,
+                 T_CLOSE_PARENTHESIS,
+                 T_STRING,
+                )
+            );
 
             if ($modifyLeft === true && $tokens[($stackPtr - 1)]['code'] === T_WHITESPACE) {
                 $error = 'There must not be a single space before a unary operator statement';
@@ -69,7 +75,7 @@ class Drupal_Sniffs_Formatting_SpaceUnaryOperatorSniff implements PHP_CodeSniffe
                 return;
             }
 
-            if ($modifyLeft === false && substr($tokens[($stackPtr + 1)]['content'], 0, 1) !== '$') {
+            if ($modifyLeft === false && $tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
                 $error = 'A unary operator statement must not be followed by a single space';
                 $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'IncDecRight');
                 if ($fix === true) {

@@ -2,8 +2,6 @@
 /**
  * Drupal_Sniffs_Semantics_FunctionTSniff
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
@@ -20,6 +18,13 @@
 class Drupal_Sniffs_Semantics_FunctionTSniff extends Drupal_Sniffs_Semantics_FunctionCall
 {
 
+    /**
+     * We also want to catch $this->t() calls in Drupal 8.
+     *
+     * @var bool
+     */
+    protected $includeMethodCalls = true;
+
 
     /**
      * Returns an array of function names this test wants to listen for.
@@ -28,7 +33,11 @@ class Drupal_Sniffs_Semantics_FunctionTSniff extends Drupal_Sniffs_Semantics_Fun
      */
     public function registerFunctionNames()
     {
-        return array('t');
+        return array(
+                't',
+                'TranslatableMarkup',
+                'TranslationWrapper',
+               );
 
     }//end registerFunctionNames()
 
@@ -36,14 +45,13 @@ class Drupal_Sniffs_Semantics_FunctionTSniff extends Drupal_Sniffs_Semantics_Fun
     /**
      * Processes this function call.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile
-     *   The file being scanned.
-     * @param int                  $stackPtr
-     *   The position of the function call in the stack.
-     * @param int                  $openBracket
-     *   The position of the opening parenthesis in the stack.
-     * @param int                  $closeBracket
-     *   The position of the closing parenthesis in the stack.
+     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param int                  $stackPtr     The position of the function call in
+     *                                           the stack.
+     * @param int                  $openBracket  The position of the opening
+     *                                           parenthesis in the stack.
+     * @param int                  $closeBracket The position of the closing
+     *                                           parenthesis in the stack.
      *
      * @return void
      */
@@ -81,7 +89,7 @@ class Drupal_Sniffs_Semantics_FunctionTSniff extends Drupal_Sniffs_Semantics_Fun
             $stringAfter = $phpcsFile->findNext(PHP_CodeSniffer_Tokens::$emptyTokens, ($concatAfter + 1), null, true, null, true);
             if ($stringAfter !== false
                 && $tokens[$stringAfter]['code'] === T_CONSTANT_ENCAPSED_STRING
-                && strpos($tokens[$stringAfter]['content'], '<') === false
+                && $this->checkConcatString($tokens[$stringAfter]['content']) === false
             ) {
                 $warning = 'Do not concatenate strings to translatable strings, they should be part of the t() argument and you should use placeholders';
                 $phpcsFile->addWarning($warning, $stringAfter, 'ConcatString');
@@ -121,6 +129,34 @@ class Drupal_Sniffs_Semantics_FunctionTSniff extends Drupal_Sniffs_Semantics_Fun
         }
 
     }//end processFunctionCall()
+
+
+    /**
+     * Checks if a string can be concatenated with a translatable string.
+     *
+     * @param string $string The string that is concatenated to a t() call.
+     *
+     * @return bool
+     *   TRUE if the string is allowed to be concatenated with a translatable
+     *   string, FALSE if not.
+     */
+    protected function checkConcatString($string)
+    {
+        // Remove outer quotes, spaces and HTML tags from the original string.
+        $string = trim($string, '"\'');
+        $string = trim(strip_tags($string));
+
+        if ($string === '') {
+            return true;
+        }
+
+        if (in_array($string, ['(', ')', '[', ']', '-', '<', '>', '«', '»', '\n'], true)) {
+            return true;
+        }
+
+        return false;
+
+    }//end checkConcatString()
 
 
 }//end class

@@ -2,16 +2,14 @@
 /**
  * Parses and verifies the class doc comment.
  *
- * PHP version 5
- *
  * @category PHP
  * @package  PHP_CodeSniffer
  * @link     http://pear.php.net/package/PHP_CodeSniffer
  */
 
 /**
- * Checks that comment doc blocks exist on classes and interfaces. Largely copied
- * from Squiz_Sniffs_Commenting_ClassCommentSniff.
+ * Checks that comment doc blocks exist on classes, interfaces and traits. Largely
+ * copied from Squiz_Sniffs_Commenting_ClassCommentSniff.
  *
  * @category  PHP
  * @package   PHP_CodeSniffer
@@ -35,6 +33,7 @@ class Drupal_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSniffer_Snif
         return array(
                 T_CLASS,
                 T_INTERFACE,
+                T_TRAIT,
                );
 
     }//end register()
@@ -69,27 +68,21 @@ class Drupal_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSniffer_Snif
         }
 
         // Try and determine if this is a file comment instead of a class comment.
-        // We assume that if this is the first comment after the open PHP tag, then
-        // it is most likely a file comment instead of a class comment.
         if ($tokens[$commentEnd]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
             $start = ($tokens[$commentEnd]['comment_opener'] - 1);
         } else {
             $start = ($commentEnd - 1);
         }
 
-        $prev = $phpcsFile->findPrevious(T_WHITESPACE, $start, null, true);
-        if ($tokens[$prev]['code'] === T_OPEN_TAG) {
-            $prevOpen = $phpcsFile->findPrevious(T_OPEN_TAG, ($prev - 1));
-            if ($prevOpen === false) {
-                // This is a comment directly after the first open tag,
-                // so probably a file comment.
-                $fix = $phpcsFile->addFixableError('Missing %s doc comment', $stackPtr, 'Missing', array($name));
-                if ($fix === true) {
-                    $phpcsFile->fixer->addContent($commentEnd, "\n/**\n *\n */");
-                }
-
-                return;
+        $fileTag = $phpcsFile->findNext(T_DOC_COMMENT_TAG, ($start + 1), $commentEnd, false, '@file');
+        if ($fileTag !== false) {
+            // This is a file comment.
+            $fix = $phpcsFile->addFixableError('Missing %s doc comment', $stackPtr, 'Missing', array($name));
+            if ($fix === true) {
+                $phpcsFile->fixer->addContent($commentEnd, "\n/**\n *\n */");
             }
+
+            return;
         }
 
         if ($tokens[$commentEnd]['code'] === T_COMMENT) {

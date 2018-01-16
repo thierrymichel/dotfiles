@@ -24,8 +24,8 @@ antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
 antigen apply
 
 # EPIC zsh toolbox
-export EPIC_ZSH_FUNCTIONS="newp work"
-antigen bundle https://git.epic.net/epic-toolbox/epic-zsh.git
+# export EPIC_ZSH_FUNCTIONS="newp work gulprm"
+# antigen bundle https://git.epic.net/epic-toolbox/epic-zsh.git
 
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
@@ -79,5 +79,7 @@ if [[ $1 == eval ]]; then
 fi
 
 # EPIC
+PATH=$PATH:/Users/tm/Projects/bin
+export PATH
 eval "$(autoenv --init)"
 source ~/.env
