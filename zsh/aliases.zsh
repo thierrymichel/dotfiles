@@ -75,6 +75,8 @@ alias nup="npm update"
 
 # EPIC
 alias tmi='ssh tmi'
+alias start='epic site start'
+alias stop='epic site destroy'
 
 gulprm() {
   docker rm -f `docker ps --format="table {{.Names}}" | grep local-gulp`
