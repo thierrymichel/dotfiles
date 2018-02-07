@@ -8,7 +8,7 @@
 	<config name="encoding" value="utf-8"/>
 
 	<!-- Default tab width for indentation fixes and such. -->
-	<arg name="tab-width" value="4"/>
+	<arg name="tab-width" value="2"/>
 
 	<!--
 	#############################################################################

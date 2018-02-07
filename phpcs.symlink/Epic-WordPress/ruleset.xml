@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <ruleset name="Epic WordPress">
   <description>EPIC WordPress Coding Standards</description>
+  <arg name="tab-width" value="2"/>
   <rule ref="WordPress-Core">
     <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
     <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceAfterOpenParenthesis" />
@@ -25,15 +26,20 @@
     <exclude name="PEAR.Classes.ClassDeclaration.OpenBraceNewLine" />
     <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore" />
   </rule>
-  <rule ref="Generic.WhiteSpace.ScopeIndent">
-   <properties>
-    <property name="indent" value="2"/>
-   </properties>
-  </rule>
   <rule ref="Generic.Files.LineLength">
     <properties>
-     <property name="lineLimit" value="200"/>
-     <property name="absoluteLineLimit" value="0"/>
-   </properties>
- </rule>
+      <property name="lineLimit" value="200"/>
+      <property name="absoluteLineLimit" value="0"/>
+    </properties>
+  </rule>
+  <rule ref="Generic.WhiteSpace.ScopeIndent">
+    <properties>
+      <property name="indent" value="2"/>
+    </properties>
+  </rule>
+  <rule ref="WordPress.WhiteSpace.PrecisionAlignment">
+    <properties>
+      <property name="ignoreAlignmentTokens" type="array" value="T_INLINE_HTML"/>
+    </properties>
+  </rule>
 </ruleset>
