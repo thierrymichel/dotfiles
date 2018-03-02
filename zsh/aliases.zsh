@@ -75,8 +75,16 @@ alias nup="npm update"
 
 # EPIC
 alias tmi='ssh tmi'
+## Commands
 alias start='epic site start'
-alias stop='epic site destroy'
+alias destroy='epic site destroy'
+## Fast commands
+alias ess='epic site start'
+alias esd='epic site destroy'
+alias eg='epic gulp'
+alias egb='epic gulp build'
+alias eds='epic deploy staging'
+alias edl='epic deploy live'
 
 gulprm() {
   docker rm -f `docker ps --format="table {{.Names}}" | grep local-gulp`
