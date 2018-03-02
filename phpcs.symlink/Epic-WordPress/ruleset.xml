@@ -3,15 +3,17 @@
   <description>EPIC WordPress Coding Standards</description>
   <arg name="tab-width" value="2"/>
   <rule ref="WordPress-Core">
-    <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
+    <exclude name="WordPress.Files.FileName.InvalidClassFileName" />
     <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceAfterOpenParenthesis" />
     <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceBeforeCloseParenthesis" />
+    <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
     <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen" />
     <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose" />
   </rule>
   <rule ref="PEAR">
     <exclude name="PEAR.Commenting.FileComment.Missing" />
     <exclude name="PEAR.Commenting.FileComment.MissingVersion" />
+    <exclude name="PEAR.Commenting.FileComment.MissingLinkTag" />
     <exclude name="PEAR.Commenting.FileComment.MissingCategoryTag" />
     <exclude name="PEAR.Commenting.FileComment.MissingLicenseTag" />
     <exclude name="PEAR.Commenting.ClassComment.MissingLinkTag" />
