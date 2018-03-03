@@ -7,7 +7,10 @@
 #
 # Run ./defaults.sh and you'll be good to go.
 
-COMPUTER_NAME="thierry-mbp"
+# COMPUTER_NAME="thierry-mbp"
+echo Choose your computer name [ENTER: thierry-mbp]:
+read res
+COMPUTER_NAME=$([[ -z "${res// }" ]] && echo "thierry-mbp" || echo "$res")
 
 osascript -e 'tell application "System Preferences" to quit'
 
