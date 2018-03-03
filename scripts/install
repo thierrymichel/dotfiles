@@ -27,6 +27,10 @@ macos/defaults.sh
 
 # Third, ZSH
 echo "› Set ZSH as default"
+ZSH_PATH=$(which zsh)
+if ! grep -q $ZSH_PATH '/etc/shells'; then
+  echo $ZSH_PATH | sudo tee -a /etc/shells
+fi
 chsh -s $(which zsh)
 
 echo "› installers"
