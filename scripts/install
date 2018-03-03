@@ -17,8 +17,14 @@ cd "$(dirname $0)"/..
 homebrew/install.sh 2>&1
 
 # Run Homebrew through the Brewfile
-echo "› brew bundle"
-brew bundle
+while true; do
+  read -p "Do you wish to install brew packages (need to be Thierry Michel… ;)? [Y/n]" yn
+  case $yn in
+    [Yy]* ) echo "› brew bundle"; echo brew bundle; break;;
+    [Nn]* ) ech o "› skip brew bundle" break;;
+    * ) echo "Please answer yes or no.";;
+  esac
+done
 
 # Second OS related stuff
 # Set macOS defaults
