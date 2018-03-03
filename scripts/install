@@ -21,7 +21,7 @@ while true; do
   read -p "Do you wish to install brew packages (need to be Thierry Michel… ;)? [Y/n]" yn
   case $yn in
     [Yy]* ) echo "› brew bundle"; echo brew bundle; break;;
-    [Nn]* ) echo "› skip brew bundle" break;;
+    [Nn]* ) echo "› skip brew bundle"; break;;
     * ) echo "Please answer yes or no.";;
   esac
 done
