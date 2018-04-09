@@ -4,13 +4,10 @@ tap 'caskroom/cask'
 tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/services'
-tap 'homebrew/versions'
 tap 'jlhonora/lsusb'
-# tap 'osx-cross/avr'
 
 brew 'antigen'
 brew 'coreutils'
-# brew 'dfu-programmer'
 brew 'dockutil'
 brew 'gist'
 brew 'git'
@@ -27,12 +24,10 @@ brew 'the_silver_searcher'
 brew 'wget'
 brew 'zsh'
 brew 'zsh-completions'
-# brew 'avr-libc'
 brew 'jlhonora/lsusb/lsusb'
 
 cask 'a-better-finder-attributes'
 cask 'a-better-finder-rename'
-# cask 'arduino'
 cask 'betterzipql'
 cask 'big-mean-folder-machine'
 cask 'blender'
@@ -82,6 +77,7 @@ mas 'Amphetamine', id: 937984704
 mas 'Annotate', id: 918207447
 mas 'BasicSportsTimer', id: 1123595107
 mas 'Bear', id: 1091189122
+mas 'Bumpr', id: 1166066070
 mas 'Byword', id: 420212497
 mas 'ColorSnapper2', id: 969418666
 mas 'DaisyDisk', id: 411643860
@@ -91,16 +87,20 @@ mas 'iA Writer Classic', id: 439623248
 mas 'IP Scanner Home', id: 422293948
 mas 'Key Codes', id: 414568915
 mas 'Keynote', id: 409183694
+mas 'Kindle', id: 405399194
 mas 'LINE', id: 539883307
 mas 'LittleIpsum', id: 405772121
 mas 'Magic Calculator', id: 421993158
 mas 'Marked 2', id: 890031187
 mas 'Memory Clean', id: 451444120
+mas 'myTracks', id: 403100976
 mas 'Pages', id: 409201541
 mas 'Patterns', id: 429449079
 mas 'Permute', id: 731738567
 mas 'Pocket', id: 568494494
+mas 'Quiver', id: 866773894
 mas 'Slack', id: 803453959
+mas 'Spectrum', id: 518156125
 mas 'The Unarchiver', id: 425424353
 mas 'TimeKeeper', id: 423293264
 mas 'Tweetbot', id: 557168941
