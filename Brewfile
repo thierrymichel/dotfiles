@@ -91,7 +91,6 @@ mas 'Kindle', id: 405399194
 mas 'LINE', id: 539883307
 mas 'LittleIpsum', id: 405772121
 mas 'Magic Calculator', id: 421993158
-mas 'Marked 2', id: 890031187
 mas 'Memory Clean', id: 451444120
 mas 'myTracks', id: 403100976
 mas 'Pages', id: 409201541
