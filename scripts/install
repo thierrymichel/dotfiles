@@ -20,7 +20,7 @@ homebrew/install.sh 2>&1
 while true; do
   read -p "Do you wish to install brew packages (need to be Thierry Michel… ;)? [Y/n]" yn
   case $yn in
-    [Yy]* ) echo "› brew bundle"; echo brew bundle; break;;
+    [Yy]* ) echo "› brew bundle"; brew bundle; break;;
     [Nn]* ) echo "› skip brew bundle"; break;;
     * ) echo "Please answer yes or no.";;
   esac
