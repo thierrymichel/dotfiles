@@ -6,7 +6,16 @@ See [Brewfile](Brewfile)
 
 * brew
 * cask
+    - a-better-finder-attributes (checksum)
+    - betterzipql (unavailable)
+    - google-drive (unavailable) -> google-drive-file-stream ?
+    - robomongo (unavailable)
+    - unrarx (checksum)
+    - utorrent (unavailable)
+    - virtualbox
+    - virtualbox-extension-pack
 * mas
+    - LittelIpsum
 
 ---
 
