@@ -29,6 +29,7 @@ brew 'jlhonora/lsusb/lsusb'
 
 cask 'a-better-finder-attributes'
 cask 'a-better-finder-rename'
+cask 'abstract'
 cask 'betterzipql'
 cask 'big-mean-folder-machine'
 cask 'blender'
@@ -40,6 +41,8 @@ cask 'dash'
 cask 'docker'
 cask 'dropbox'
 cask 'firefox'
+cask 'folio'
+cask 'folx'
 cask 'fontexplorer-x-pro'
 cask 'franz'
 cask 'gitter'
@@ -51,27 +54,35 @@ cask 'ipartition'
 cask 'iterm2'
 cask 'kaleidoscope'
 cask 'kindle'
+cask 'kitematic'
 cask 'launchbar'
 cask 'mamp'
 cask 'paw'
 cask 'poedit'
+cask 'private-internet-access'
 cask 'qlcolorcode'
 cask 'qlimagesize'
 cask 'qlstephen'
 cask 'quicklook-csv'
 cask 'quicklook-json'
+cask 'recordit'
 cask 'robomongo'
 cask 'sdformatter'
 cask 'sequel-pro'
 cask 'sketch'
+cask 'sketch-toolbox'
 cask 'skype'
 cask 'spectacle'
+cask 'timing'
 cask 'transmit'
+cask 'tunnelbear'
+cask 'tunnelblick'
 cask 'unrarx'
 cask 'utorrent'
+cask 'virtualbox'
+cask 'virtualbox-extension-pack'
 cask 'visual-studio-code'
 cask 'vlc'
-cask 'xtrafinder'
 
 mas '1Password', id: 443987910
 mas 'Amphetamine', id: 937984704
@@ -87,14 +98,12 @@ mas 'Fantastical 2', id: 975937182
 mas 'iA Writer Classic', id: 439623248
 mas 'IP Scanner Home', id: 422293948
 mas 'Key Codes', id: 414568915
-mas 'Keynote', id: 409183694
 mas 'Kindle', id: 405399194
 mas 'LINE', id: 539883307
 mas 'LittleIpsum', id: 405772121
 mas 'Magic Calculator', id: 421993158
 mas 'Memory Clean', id: 451444120
 mas 'myTracks', id: 403100976
-mas 'Pages', id: 409201541
 mas 'Patterns', id: 429449079
 mas 'Permute', id: 731738567
 mas 'Pocket', id: 568494494

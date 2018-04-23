@@ -12,7 +12,6 @@
 * Zsh
     - `.zshrc`
 
-
 ## nvm
 
 v0.33.0
@@ -21,27 +20,46 @@ v0.33.0
 
 See [Brewfile](Brewfile)
 
-* brew ✅
+* brew
 * cask
-    - osx-cross/avr/avr-binutils (takes soooo long time!) -> try with changes (5694965)
 * mas
-    - Osfoora failed -> removed
-    - Already using Pages (not a problem)
-    - Already using Keynote (not a problem)
 
-> Homebrew Bundle failed! 1 Brewfile dependencies failed to install
+---
 
-Password before 'casking'… -> bootstrap relaunched :/
+### Not installed
+
+- Google Drive / File Stream
+- Ember 2 alpha
+- FF Developer Edition
+- Google Canary
+- Libre Office (?)
+- Marked 2
+- Memory Clean
+- Microsoft Office
+- Open in Code
+- Patterns
+- Safari Technology Preview
+- Suunto Link
+
+### To remove
+
+- GarageBand
+- iMovie
+- Numbers
+
+---
 
 ## MacOS defauls
 
 `dockutil` not found -> install before via Homebrew
 
+---
+
 ## Installers
 
 `nvm` is not correctly loaded…
 
------
+---
 
 SSH keys migrations ?
-Apps prefs ?
+Apps prefs -> mackup ?

@@ -5,14 +5,23 @@ directory = Mackup
 
 [applications_to_sync]
 amphetamine
+daisydisk
 dash
 editorconfig
+franz
+handbrake
+iterm2
+kaleidoscope
 launchbar
-sizeup
+marked2
+messages
+poedit
+robomongo
 sketch
+spectacle
 ssh
-sublime-text-3
 transmit
+vscode
+vlc
 wakatime
-xtrafinder
 my-config

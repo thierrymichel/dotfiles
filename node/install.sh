@@ -31,7 +31,9 @@ else
     david
     eslint
     gulp-cli
+    gzip-size-cli
     json-server
+    local-ssl-proxy
     np
     sass-lint
     spoof

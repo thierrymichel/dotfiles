@@ -50,3 +50,8 @@ scripts/bootstrap
 5. Git LFS
 6. Php Code Sniffer
 7. Set ZSH as default
+
+### > backup
+
+- `mackup backup` (+ sync DropBox)
+- SSH keys

@@ -14,20 +14,12 @@ alias -- -='cd -'
 alias home='cd ~'
 alias dt='cd ~/Desktop'
 alias dl='cd ~/Downloads'
-alias s='cd ~/Sites'
-alias d='cd ~/Designs'
-alias dev='cd -P ~/Devbox'
 ## Projects
+alias gh='cd ~/GitHub'
 alias p='cd ~/Projects'
 alias pj='cd ~/Projects'
-alias pulse='cd ~/Projects/Pulse/pulse'
-alias heaj='cd ~/Projects/heaj'
-## Remote aliased folders
-alias data='cd -P ~/Data'
-alias gh='cd -P ~/GitHub'
 ## Applications
 alias µ='micro'
-alias st='subl .'
 
 # Webserver
 alias server='python -m SimpleHTTPServer 8000'
