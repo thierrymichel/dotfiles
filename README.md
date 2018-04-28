@@ -25,7 +25,6 @@ scripts/bootstrap
 
 - `coding/babelrc.symlink`
 - `coding/editorconfig.symlink`
-- `coding/env.symlink`
 - `coding/eslintrc.json.symlink`
 - `coding/sass-lint.yml.symlink`
 - `git/git_commit_msg.symlink`
@@ -35,23 +34,36 @@ scripts/bootstrap
 - `mackup/mackup.cfg.symlink`
 - `mackup.symlink`
 - `phpcs.symlink`
+- `vscode/github-markdown.css.symlink`
 - `zsh/zshrc.symlink`
 
 ### > install
 
 1. Homebrew (see [`Brewfile`](Brewfile]))
-2. Node
-    - `nvm`
-    - Latest `node` LTS version
-    - Update `npm`
-    - global modules (see [`node/install.sh`](node/install.sh))
-3. MacOS "defaults settings"
-4. Applications update (Mac AppStore)
-5. Git LFS
-6. Php Code Sniffer
-7. Set ZSH as default
+2. MacOS "defaults settings" (see [`defaults.sh`](macos/defaults.sh]))
+3. ZSH: antigen + set as default
+4. Installers
+    - Composer
+    - Git LFS
+    - App Store software update
+    - node LTS + global modules
+    - WP-CLI
+
+---
+
+## Memento
+
+### > restore
+
+1. See [install](#install)
+2. Install missing applications + uninstall ([notes](NOTES.md))
+3. Dropbox setup + sync
+4. Mackup (`mackup restore`)
+5. Restore SSH keys
 
 ### > backup
 
-- `mackup backup` (+ sync DropBox)
-- SSH keys
+1. Backup through Time Machine + Carbon Copy Cloner
+2. Mackup (`mackup backup`)
+3. Dropbox sync
+4. Save SSH keys

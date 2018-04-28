@@ -27,10 +27,10 @@ brew 'zsh'
 brew 'zsh-completions'
 brew 'jlhonora/lsusb/lsusb'
 
-cask 'a-better-finder-attributes'
+# cask 'a-better-finder-attributes'
 cask 'a-better-finder-rename'
 cask 'abstract'
-cask 'betterzipql'
+cask 'betterzip'
 cask 'big-mean-folder-machine'
 cask 'blender'
 cask 'blueharvest'
@@ -47,7 +47,7 @@ cask 'fontexplorer-x-pro'
 cask 'franz'
 cask 'gitter'
 cask 'google-chrome'
-cask 'google-drive'
+# cask 'google-drive'
 cask 'handbrake'
 cask 'iconjar'
 cask 'ipartition'
@@ -66,7 +66,7 @@ cask 'qlstephen'
 cask 'quicklook-csv'
 cask 'quicklook-json'
 cask 'recordit'
-cask 'robomongo'
+# cask 'robomongo'
 cask 'sdformatter'
 cask 'sequel-pro'
 cask 'sketch'
@@ -77,10 +77,10 @@ cask 'timing'
 cask 'transmit'
 cask 'tunnelbear'
 cask 'tunnelblick'
-cask 'unrarx'
-cask 'utorrent'
-cask 'virtualbox'
-cask 'virtualbox-extension-pack'
+# cask 'unrarx'
+# cask 'utorrent'
+# cask 'virtualbox'
+# cask 'virtualbox-extension-pack'
 cask 'visual-studio-code'
 cask 'vlc'
 
@@ -100,7 +100,7 @@ mas 'IP Scanner Home', id: 422293948
 mas 'Key Codes', id: 414568915
 mas 'Kindle', id: 405399194
 mas 'LINE', id: 539883307
-mas 'LittleIpsum', id: 405772121
+# mas 'LittleIpsum', id: 405772121
 mas 'Magic Calculator', id: 421993158
 mas 'Memory Clean', id: 451444120
 mas 'myTracks', id: 403100976

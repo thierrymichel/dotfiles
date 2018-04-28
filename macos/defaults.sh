@@ -385,10 +385,10 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 ###############################################################################
 
 # Disable local Time Machine backups
-hash tmutil &> /dev/null && sudo tmutil disablelocal
+# hash tmutil &> /dev/null && sudo tmutil disablelocal
 
-# Disable local Time Machine snapshots
-sudo tmutil disablelocal
+# Disable Time Machine automatic backup
+sudo tmutil disable
 
 
 

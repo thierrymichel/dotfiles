@@ -1,54 +1,39 @@
-# Inventory
+# Notes
 
 ## Applications
 
-See [Brewfile](Brewfile)
-
-* brew
-* cask
-    - a-better-finder-attributes (checksum)
-    - betterzipql (unavailable)
-    - google-drive (unavailable) -> google-drive-file-stream ?
-    - robomongo (unavailable)
-    - unrarx (checksum)
-    - utorrent (unavailable)
-    - virtualbox
-    - virtualbox-extension-pack
-* mas
-    - LittelIpsum
-
----
-
 ### Not installed
 
-- Google Drive / File Stream
+- A Better Finder Attributes
+- BetterZip
 - Ember 2 alpha
 - FF Developer Edition
+- Google Drive / File Stream
 - Google Canary
 - Libre Office (?)
+- LittleIpsum
 - Marked 2
 - Memory Clean
 - Microsoft Office
 - Open in Code
 - Patterns
+- Robomongo
 - Safari Technology Preview
 - Suunto Link
+- Unrarx
+- uTorrent
+- Virtual Box + extendsions
 
----
-
-- Composer ?
-- Dinghy ?
-- wp-cli
-
-### To remove
+### To uninstall
 
 - GarageBand
 - iMovie
 - Numbers
 
-## Other
+## Commands
 
-- DropBox sync
-- SSH keys migrations
-- Apps prefs + config -> `mackup backup` vs `mackup restore`
-- EPIC commands
+### Missing
+
+- autoenv
+- pear + phpcs (see `phpcs/install.sh`)
+- dinghy + EPIC commands

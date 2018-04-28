@@ -7,12 +7,6 @@ set -e
 cd "$(dirname $0)"/..
 
 # First package managers
-
-# Install nvm + latest -> now ZSH plugin (via Antigen)
-# echo "› nvm"
-# echo "  Installing nvm for you."
-# curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash
-
 # Install homebrew
 homebrew/install.sh 2>&1
 
@@ -32,6 +26,8 @@ echo "› Mac OS defaults"
 macos/defaults.sh
 
 # Third, ZSH
+echo "› Installing Antigen"
+curl -L git.io/antigen > ~/antigen.zsh
 echo "› Set ZSH as default"
 ZSH_PATH=$(which zsh)
 if ! grep -q $ZSH_PATH '/etc/shells'; then
@@ -41,7 +37,7 @@ chsh -s $(which zsh)
 
 echo "› installers"
 # find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+# find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
 
 echo ''
 echo '  All stuff installed!'

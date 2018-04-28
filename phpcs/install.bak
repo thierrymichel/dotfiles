@@ -15,9 +15,10 @@ then
   # 1 - /usr/local/pear
   # 4 - /usr/local/bin
   # https://coolestguidesontheplanet.com/installing-pear-on-osx-10-11-el-capitan/
-  # Duplicate php.ini from /etc
+  # Copy php.ini.default from /etc
   # Add under Paths and directories
-  # include_path = ".:/Users/tm/pear/share/pear"
+  # include_path = ".:/usr/local/pear/share/pear"
+
   # Install phpcs
   pear install PHP_codesniffer
   # Reload path
