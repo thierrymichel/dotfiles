@@ -11,6 +11,8 @@ sudo softwareupdate -i -a
 xcode-select --install
 ```
 
+Log into App Store (for mas-cli install)
+
 Install the dotfiles with Git
 
 ```
@@ -40,9 +42,10 @@ scripts/bootstrap
 ### > install
 
 1. Homebrew (see [`Brewfile`](Brewfile]))
-2. MacOS "defaults settings" (see [`defaults.sh`](macos/defaults.sh]))
-3. ZSH: antigen + set as default
-4. Installers
+2. nvm
+3. MacOS "defaults settings" (see [`defaults.sh`](macos/defaults.sh]))
+4. ZSH: antigen + set as default
+5. Installers
     - Composer
     - Git LFS
     - App Store software update
