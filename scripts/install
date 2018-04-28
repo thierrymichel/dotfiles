@@ -7,6 +7,9 @@ set -e
 cd "$(dirname $0)"/..
 
 # First package managers
+# Install nvm
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+
 # Install homebrew
 homebrew/install.sh 2>&1
 
@@ -37,7 +40,7 @@ chsh -s $(which zsh)
 
 echo "› installers"
 # find the installers and run them iteratively
-# find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
 
 echo ''
 echo '  All stuff installed!'

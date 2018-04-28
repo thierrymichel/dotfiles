@@ -4,8 +4,9 @@
 
 echo "› installers:node"
 
-# Load nvm (ZSH plugin)
-. ~/.zshrc
+# Load nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 if [ "$ENV" = 'update' ]
 then
