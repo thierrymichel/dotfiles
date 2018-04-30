@@ -41,9 +41,9 @@ scripts/bootstrap
 
 ### > install
 
-1. Homebrew (see [`Brewfile`](Brewfile]))
+1. Homebrew (see [`Brewfile`](Brewfile))
 2. nvm
-3. MacOS "defaults settings" (see [`defaults.sh`](macos/defaults.sh]))
+3. MacOS "defaults settings" (see [`defaults.sh`](macos/defaults.sh))
 4. ZSH: antigen + set as default
 5. Installers
     - Composer
