@@ -80,7 +80,7 @@ fi
 # EPIC
 PATH=$PATH:/Users/tm/Projects/bin
 export PATH
-# eval "$(autoenv --init)"
+eval "$(autoenv --init)"
 
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
