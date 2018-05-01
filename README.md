@@ -60,11 +60,11 @@ scripts/bootstrap
 
 1. See [install](#install)
 2. Dropbox setup + sync (it can take a while…)
-3. Setup 1Password (personal, then family)
-4. Install missing applications + uninstall ([notes](NOTES.md))
+3. Setup 1Password (personal, then family, then professional)
+4. Install missing applications ([notes](NOTES.md))
 5. Mackup (`mackup restore`)
 6. Restore SSH keys
-7. Other… ([notes](NOTES.md))
+7. Open apps + add licence / register…
 
 ### > backup
 

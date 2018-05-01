@@ -47,7 +47,6 @@ cask 'fontexplorer-x-pro'
 cask 'franz'
 cask 'gitter'
 cask 'google-chrome'
-# cask 'google-drive'
 cask 'handbrake'
 cask 'iconjar'
 cask 'ipartition'
@@ -59,7 +58,6 @@ cask 'launchbar'
 cask 'mamp'
 cask 'paw'
 cask 'poedit'
-cask 'private-internet-access'
 cask 'qlcolorcode'
 cask 'qlimagesize'
 cask 'qlstephen'
@@ -101,9 +99,7 @@ mas 'Key Codes', id: 414568915
 mas 'Keynote', id: 409183694
 mas 'Kindle', id: 405399194
 mas 'LINE', id: 539883307
-# mas 'LittleIpsum', id: 405772121
 mas 'Magic Calculator', id: 421993158
-mas 'Memory Clean', id: 451444120
 mas 'myTracks', id: 403100976
 mas 'Pages', id: 409201541
 mas 'Patterns', id: 429449079
