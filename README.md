@@ -41,9 +41,9 @@ scripts/bootstrap
 
 ### > install
 
-1. Homebrew (see [`Brewfile`](Brewfile))
-2. nvm
-3. MacOS "defaults settings" (see [`defaults.sh`](macos/defaults.sh))
+1. nvm
+2. Homebrew (see [`Brewfile`](Brewfile]))
+3. MacOS "defaults settings" (see [`defaults.sh`](macos/defaults.sh]))
 4. ZSH: antigen + set as default
 5. Installers
     - Composer
@@ -59,10 +59,12 @@ scripts/bootstrap
 ### > restore
 
 1. See [install](#install)
-2. Install missing applications + uninstall ([notes](NOTES.md))
-3. Dropbox setup + sync
-4. Mackup (`mackup restore`)
-5. Restore SSH keys
+2. Dropbox setup + sync (it can take a while…)
+3. Setup 1Password (personal, then family)
+4. Install missing applications + uninstall ([notes](NOTES.md))
+5. Mackup (`mackup restore`)
+6. Restore SSH keys
+7. Other… ([notes](NOTES.md))
 
 ### > backup
 
