@@ -1,6 +1,6 @@
 [storage]
 engine = file_system
-Path = Dropbox (Personnelle)
+Path = Dropbox (Personal)
 directory = Mackup
 
 [applications_to_sync]
