@@ -69,8 +69,6 @@ done
 
 unset config_files
 
-
-# EXTRA stuff
 # From @hugues
 if [[ $1 == eval ]]; then
   eval "$@"
@@ -82,14 +80,21 @@ PATH=$PATH:/Users/tm/Projects/bin
 export PATH
 eval "$(autoenv --init)"
 
+# EXTRA loading
+# Load rbenv automatically
+eval "$(rbenv init -)"
+
+# AVN
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
+# NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# NativeScript
 ###-tns-completion-start-###
-if [ -f /Users/tm/.tnsrc ]; then 
-    source /Users/tm/.tnsrc 
+if [ -f /Users/tm/.tnsrc ]; then
+    source /Users/tm/.tnsrc
 fi
 ###-tns-completion-end-###
