@@ -35,6 +35,7 @@ else
     gzip-size-cli
     json-server
     local-ssl-proxy
+    nativescript
     np
     sass-lint
     spoof
