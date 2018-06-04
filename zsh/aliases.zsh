@@ -71,12 +71,15 @@ alias tmi='ssh tmi'
 alias start='epic site start'
 alias destroy='epic site destroy'
 ## Fast commands
-alias ess='epic site start'
-alias esd='epic site destroy'
-alias eg='epic gulp'
-alias egb='epic gulp build'
 alias eds='epic deploy staging'
 alias edl='epic deploy live'
+alias eg='epic gulp'
+alias egb='epic gulp build'
+alias eni='epic npm install'
+alias enu='epic npm uninstall'
+alias enl='epic npm ls'
+alias ess='epic site start'
+alias esd='epic site destroy'
 
 gulprm() {
   docker rm -f `docker ps --format="table {{.Names}}" | grep local-gulp`
