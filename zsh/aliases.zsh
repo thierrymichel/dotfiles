@@ -14,10 +14,12 @@ alias -- -='cd -'
 alias home='cd ~'
 alias dt='cd ~/Desktop'
 alias dl='cd ~/Downloads'
+alias heaj='cd ~/Heaj'
 ## Projects
 alias gh='cd ~/GitHub'
 alias p='cd ~/Projects'
 alias pj='cd ~/Projects'
+alias b='cd ~/Projects/epic/barquette'
 ## Applications
 alias µ='micro'
 
@@ -58,12 +60,15 @@ alias listaliases="alias | sed 's/=.*//'"
 alias listfunctions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'" # show non _prefixed functions
 
 # node / npm
-ng() {
+npath() {
   export NODE_PATH=`npm root -g` # NODE_PATH for requiring global modules
 }
+# alias nclean="rm -rf **/node_modules"
 alias ni="npm install"
 alias nun="npm uninstall"
 alias nup="npm update"
+# Git
+alias gz="git cz"
 
 # EPIC
 alias tmi='ssh tmi'
@@ -72,14 +77,18 @@ alias start='epic site start'
 alias destroy='epic site destroy'
 ## Fast commands
 alias eds='epic deploy staging'
-alias edl='epic deploy live'
 alias eg='epic gulp'
 alias egb='epic gulp build'
 alias eni='epic npm install'
 alias enu='epic npm uninstall'
 alias enl='epic npm ls'
+alias ens='epic npm start'
+alias enr='epic npm run'
+alias ent='epic npm test'
 alias ess='epic site start'
 alias esd='epic site destroy'
+alias et='epic-track'
+alias etd='epic-track day'
 
 gulprm() {
   docker rm -f `docker ps --format="table {{.Names}}" | grep local-gulp`

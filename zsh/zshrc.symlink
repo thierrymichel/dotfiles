@@ -61,6 +61,8 @@ done
 autoload -U compinit
 compinit
 
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}
 do

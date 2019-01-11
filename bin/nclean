@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# delete node_modules folders
+#
+# Free some space…
+
+while true; do
+  read -p "Do you really want to delete ALL node_modules folders [Yn]?" yn
+  case $yn in
+      [Nn]* ) exit;;
+      * ) rm -rf **/node_modules; break;;
+  esac
+done
